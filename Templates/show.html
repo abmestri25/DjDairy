@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">{{user.email}}</a>
+    <form class="form-inline" method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
+    </form>
+
+
+</nav>
+<div class="container mt-5">
+
+   {% for detail in details %}
+    <div class="text-center">
+        <p>Contact No : {{detail.phone_no}}</p>
+    </div>
+    <div class="text-center">
+        <p>Age : {{detail.age}}</p>
+    </div>
+    {% endfor %}
+
+    <a href="{% url 'add' %}"><button class="btn btn-outline-primary my-2 my-sm-0">ADD MEMORIES</button></a>
+
+
+</div>
+
+<div class="container mt-5">
+    <ul class="list-group">
+        {% for mem in memories %}
+            <li class="list-group-item mt-2">{{mem.title}}
+                <p>{{mem.desc}}</p>
+                <p>{{mem.date}}</p>
+                <form class=" float-right" action="delete/{{mem.id}}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+            </li>
+        {% endfor %}  
+          </ul>
+    </div>
+</div>
+
+{% endblock body %}

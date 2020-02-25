@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a href="{% url 'show' %}" class="navbar-brand"> 👈  Dashboard</a>
+  <form class="form-inline" method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <button class="btn btn-outline-danger my-2 my-sm-0" >Logout</button>
+  </form>
+
+
+</nav>
+<div class="container">
+    <div class="text-center">
+        <h2 class="text-uppercase">{{user.username}}</h2>
+    </div>
+    <div class="text-center">
+        <h2>{{user.email}}</h2>
+    </div>
+
+    <h1>Add Memories</h1>
+    <form action="{% url 'add' %}" method="POST">
+    {% csrf_token %}
+        <input type='text' class="form-control" name="data" id="" cols="25" rows="5" placeholder="Title goes here..">
+        <textarea class="form-control mt-2" name="desc" id="" cols="20" rows="10" placeholder="Description goes here..."></textarea>
+        <button  class="btn btn-outline-primary my-2 mx-sm-auto" >ADD </button>
+    </form>
+
+    
+</div>
+
+
+{% endblock body %}
+
+
+
